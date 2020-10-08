@@ -9,11 +9,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ryoyamada.agentodo.BuildConfig
 import com.ryoyamada.agentodo.R
+import com.ryoyamada.agentodo.TodoListViewModel
 import com.ryoyamada.agentodo.model.Todo
 import kotlinx.android.synthetic.main.fragment_todo_list.*
-import java.util.*
+import androidx.lifecycle.Observer
 
 class TodoListFragment : Fragment() {
+    private val todoListViewModel = TodoListViewModel()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -24,13 +27,12 @@ class TodoListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val adapter = TodoListAdapter()
-        if (BuildConfig.DEBUG) {
-            adapter.todos = Todo.makeTestData()
-        }
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+        todoListViewModel.todos.observe(viewLifecycleOwner, Observer { adapter.update(it ?: listOf()) })
+
+        if (BuildConfig.DEBUG) todoListViewModel.todos.value?.addAll(Todo.makeTestData())
     }
 }

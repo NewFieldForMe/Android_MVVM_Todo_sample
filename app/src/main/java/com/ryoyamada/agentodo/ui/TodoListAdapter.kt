@@ -26,6 +26,11 @@ class TodoListAdapter : RecyclerView.Adapter<TodoRowViewHolder>() {
     override fun onBindViewHolder(holder: TodoRowViewHolder, position: Int) {
         holder.bind(todos[position])
     }
+
+    fun update(list: List<Todo>) {
+        todos = list
+        notifyDataSetChanged()
+    }
 }
 
 class TodoRowViewHolder(val binding: TodoRowBinding) : RecyclerView.ViewHolder(binding.root) {
