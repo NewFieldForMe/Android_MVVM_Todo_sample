@@ -1,4 +1,4 @@
-package com.ryoyamada.agentodo
+package com.ryoyamada.agentodo.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
