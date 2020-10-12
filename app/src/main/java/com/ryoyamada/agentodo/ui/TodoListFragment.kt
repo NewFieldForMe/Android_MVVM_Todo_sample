@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ryoyamada.agentodo.BuildConfig
@@ -28,6 +29,15 @@ class TodoListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        fab.setOnClickListener {
+            val fragmentManager = fragmentManager
+            if (fragmentManager != null) {
+                val fragmentTransaction = fragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.container, InputTodoFragment())
+                fragmentTransaction.addToBackStack("TODO_LIST")
+                fragmentTransaction.commit()
+            }
+        }
         val adapter = TodoListAdapter()
 
         recyclerView.adapter = adapter
