@@ -14,6 +14,7 @@ import com.ryoyamada.agentodo.viewmodel.TodoListViewModel
 import com.ryoyamada.agentodo.model.Todo
 import kotlinx.android.synthetic.main.fragment_todo_list.*
 import androidx.lifecycle.Observer
+import com.ryoyamada.agentodo.MainActivity
 
 class TodoListFragment : Fragment() {
     private val todoListViewModel =
@@ -29,6 +30,9 @@ class TodoListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val activity: MainActivity? = activity as? MainActivity
+        activity?.setActionBarTitle("Todo List")
+
         fab.setOnClickListener {
             val fragmentManager = fragmentManager
             if (fragmentManager != null) {

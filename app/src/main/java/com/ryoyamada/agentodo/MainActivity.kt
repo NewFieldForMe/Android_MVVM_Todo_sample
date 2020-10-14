@@ -16,4 +16,14 @@ class MainActivity : AppCompatActivity() {
             fragmentTransaction.commit()
         }
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        supportFragmentManager.popBackStack()
+        return super.onSupportNavigateUp()
+    }
+
+    fun setActionBarTitle(title: String) {
+        supportActionBar?.title = title
+        supportActionBar?.setDisplayHomeAsUpEnabled(supportFragmentManager.backStackEntryCount > 0)
+    }
 }
