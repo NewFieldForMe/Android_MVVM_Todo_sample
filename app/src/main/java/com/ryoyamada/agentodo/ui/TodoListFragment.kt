@@ -44,6 +44,6 @@ class TodoListFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         todoListViewModel.todos.observe(viewLifecycleOwner, Observer { adapter.update(it ?: listOf()) })
 
-        if (BuildConfig.DEBUG) todoListViewModel.todos.value?.addAll(Todo.makeTestData())
+        if (BuildConfig.DEBUG) todoListViewModel.todos.value = Todo.makeTestData().toMutableList()
     }
 }
