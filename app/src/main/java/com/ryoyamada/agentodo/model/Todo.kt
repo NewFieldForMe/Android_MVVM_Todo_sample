@@ -1,16 +1,18 @@
 package com.ryoyamada.agentodo.model
 
+import io.realm.RealmObject
+import io.realm.annotations.PrimaryKey
 import java.util.*
 
-data class Todo (
-    val id: UUID,
-    val title: String
-) {
+open class Todo (
+    @PrimaryKey var id: String = "",
+    var title: String = ""
+) : RealmObject() {
     companion object {
         fun makeTestData() = listOf(
-            Todo(UUID.randomUUID(), "test1"),
-            Todo(UUID.randomUUID(), "test2"),
-            Todo(UUID.randomUUID(), "test3")
+            Todo(UUID.randomUUID().toString(), "test1"),
+            Todo(UUID.randomUUID().toString(), "test2"),
+            Todo(UUID.randomUUID().toString(), "test3")
         )
     }
 }
